@@ -1,9 +1,5 @@
-#
 # Copyright (c) CMNWorks
-#
 # Licensed under The MIT License
-# For full copyright and license information, please see the LICENSE.txt
-# Redistributions of files must retain the above copyright notice.
 #
 # @copyright     Copyright (c) CMNWorks Christopher M. Natan
 # @author        Christopher M. Natan
@@ -15,8 +11,8 @@ import RPi.GPIO as GPIO
 import threading
 import sys
 
-
 GPIO_PIN = 15
+TIME_OUT = 150000
 
 
 class CoinAcceptor:
@@ -28,7 +24,7 @@ class CoinAcceptor:
     def listen(self):
         GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-        print("I am now LISTENING to incoming coin")
+        print("Listening to incoming pulse")
         GPIO.add_event_detect(GPIO_PIN, GPIO.RISING)
 
         reset_counter = 0
@@ -37,13 +33,14 @@ class CoinAcceptor:
                 reset_counter = 1
                 self.coin_inserted += 1
                 inserted = str(self.coin_inserted)
-                print('I DETECTED pulse and the value is: ' + inserted)
+                print('Pulse detected and the value is: ' + inserted)
             if reset_counter >= 1:
                 reset_counter += 1
-            if reset_counter >= 150000:
-                print('The total coin ACCEPTED: ' + str(self.coin_inserted))
+            if reset_counter >= TIME_OUT:
+                print('The total pulse accepted: ' + str(self.coin_inserted))
                 self.coin_inserted = 0
                 reset_counter = 0
+
 
 try:
     GPIO.setwarnings(False)
@@ -57,5 +54,5 @@ try:
 except (KeyboardInterrupt, SystemExit):
     print("Keyboard interrupt")
 finally:
-    print("Finish"))
+    print("Finish")
     GPIO.cleanup()
