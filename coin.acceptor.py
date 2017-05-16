@@ -9,7 +9,6 @@
 # @author        Christopher M. Natan
 # @link          http://cmnworks.com
 # @license       http://www.opensource.org/licenses/mit-license.php MIT License
-#
 
 
 import RPi.GPIO as GPIO
@@ -42,12 +41,7 @@ class CoinAcceptor:
             if reset_counter >= 1:
                 reset_counter += 1
             if reset_counter >= 150000:
-                if self.coin_inserted <= valid_value:
-                    print('The total coin ACCEPTED: ' + str(self.coin_inserted))
-                else:
-                    print('Oh pulse was not ACCEPTED')
-                    break
-                    
+                print('The total coin ACCEPTED: ' + str(self.coin_inserted))
                 self.coin_inserted = 0
                 reset_counter = 0
 
