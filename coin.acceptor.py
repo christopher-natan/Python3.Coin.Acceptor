@@ -64,5 +64,4 @@ except (KeyboardInterrupt, SystemExit):
     print("Keyboard interrupt")
 finally:
     print("Finish"))
-    sock.close()
     GPIO.cleanup()
