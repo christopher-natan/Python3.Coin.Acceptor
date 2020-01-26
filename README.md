@@ -1,3 +1,5 @@
 ## Coin Acceptor
-This is a python3 script to detect the pulse coming from coin acceptor. 
-One of my Python dependency source code on project called EasyLoad
+Python3 script to detect incoming pulse from coin acceptor. Dependency python class of my vending machine project
+
+### Project Link
+http://www.cmnworks.com/vending-machine.html
